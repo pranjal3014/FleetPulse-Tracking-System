@@ -1,4 +1,4 @@
-package com.fleetpulse.dto;
+package com.fleetpulse.location.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
-package com.fleetpulse.service;
+package com.fleetpulse.location.service;
 
-import com.fleetpulse.dto.LocationRequest;
-import com.fleetpulse.dto.LocationResponse;
+import com.fleetpulse.location.dto.LocationRequest;
+import com.fleetpulse.location.dto.LocationResponse;
 
 import java.util.List;
 

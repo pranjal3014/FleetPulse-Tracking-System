@@ -2,6 +2,7 @@ package com.fleetpulse.vehicle.entity;
 
 import java.time.LocalDateTime;
 
+import com.fleetpulse.common.enums.VehicleType;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fleetpulse.common.enums.VehicleStatus;
@@ -29,13 +30,14 @@ public class Vehicle {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int vehicleId;
+	private Long vehicleId;
 	
 	@Column(name="vehicle_number")
 	private String vehicleNumber;
 	
 	@Column(name="vehicle_type")
-	private String vehicleType;
+    @Enumerated(EnumType.STRING)
+	private VehicleType vehicleType;
 	
 	@Enumerated(EnumType.STRING)
 	private VehicleStatus vehicleStatus;

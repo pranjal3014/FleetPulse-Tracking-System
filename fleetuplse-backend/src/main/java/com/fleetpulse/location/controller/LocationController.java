@@ -1,9 +1,9 @@
-package com.fleetpulse.controller;
+package com.fleetpulse.location.controller;
 
 
-import com.fleetpulse.dto.LocationRequest;
-import com.fleetpulse.dto.LocationResponse;
-import com.fleetpulse.service.LocationService;
+import com.fleetpulse.location.dto.LocationRequest;
+import com.fleetpulse.location.dto.LocationResponse;
+import com.fleetpulse.location.service.LocationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

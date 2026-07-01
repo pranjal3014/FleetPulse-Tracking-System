@@ -1,10 +1,8 @@
-package com.fleetpulse.entity;
+package com.fleetpulse.location.entity;
 
+import com.fleetpulse.vehicle.entity.Vehicle;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,20 +11,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Setter
+@Getter
 public class LocationPing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private Long vehicleId;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
+
 
     @Column(nullable = false)
-    private Double Latitude;
+    private Double latitude;
 
     @Column(nullable = false)
-    private Double Longitude;
+    private Double longitude;
 
     @Column(nullable = false)
     private Double speed;

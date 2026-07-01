@@ -14,11 +14,11 @@ public interface VehicleService{
 	List<VehicleResponse> getAllVehicle();
 	
 	//get by id
-	VehicleResponse getByIdVehicle(int id);
+	VehicleResponse getByIdVehicle(Long id);
 	
 	//update 
-	VehicleResponse updateVehicle(int id,VehicleRequest request);
+	VehicleResponse updateVehicle(Long id,VehicleRequest request);
 	
 	//delete
-	boolean deleteById(int id);
+	boolean deleteById(Long id);
 }
