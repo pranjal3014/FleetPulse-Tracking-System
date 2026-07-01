@@ -30,12 +30,12 @@ public class VehicleController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<VehicleResponse> addTrip(@Valid @RequestBody VehicleRequest vehicle){
+	public ResponseEntity<VehicleResponse> addVehicle(@Valid @RequestBody VehicleRequest vehicle){
 		return ResponseEntity.status(HttpStatus.CREATED).body(vehicleService.saveVehicle(vehicle));
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<VehicleResponse> getById(@PathVariable int id){
+	public ResponseEntity<VehicleResponse> getById(@PathVariable Long id){
 		return ResponseEntity.ok(vehicleService.getByIdVehicle(id));
 	}
 	
@@ -45,12 +45,12 @@ public class VehicleController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<VehicleResponse> updateById(@PathVariable int id, @Valid @RequestBody VehicleRequest request){
+	public ResponseEntity<VehicleResponse> updateById(@PathVariable Long id, @Valid @RequestBody VehicleRequest request){
 		return ResponseEntity.ok(vehicleService.updateVehicle(id, request));
 	}
 	
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable int id) {
+	public String delete(@PathVariable Long id) {
 		boolean status = vehicleService.deleteById(id);
 		if(status)
 			return "Data Deleted Successfully";
