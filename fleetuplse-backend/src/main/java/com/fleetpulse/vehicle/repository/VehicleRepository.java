@@ -1,5 +1,9 @@
 package com.fleetpulse.vehicle.repository;
 
-public class VehicleRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.fleetpulse.vehicle.entity.Vehicle;
+
+public interface VehicleRepository extends JpaRepository<Vehicle, Integer>{
 
 }

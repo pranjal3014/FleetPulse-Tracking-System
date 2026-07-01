@@ -1,5 +1,13 @@
 package com.fleetpulse.vehicle.dto;
 
-public class VehicleRequest {
+import com.fleetpulse.common.enums.VehicleStatus;
 
+import lombok.Data;
+
+@Data
+public class VehicleRequest {
+	
+	private String vehicleNumber;
+	private String vehicleType;
+	private VehicleStatus vehicleStatus;
 }
