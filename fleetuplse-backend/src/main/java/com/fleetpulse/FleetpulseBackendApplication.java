@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FleetuplseBackendApplication {
+public class FleetpulseBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FleetuplseBackendApplication.class, args);
+		SpringApplication.run(FleetpulseBackendApplication.class, args);
 	}
 
 }
