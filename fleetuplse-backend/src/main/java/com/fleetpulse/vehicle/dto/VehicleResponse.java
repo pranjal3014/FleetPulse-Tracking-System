@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 public class VehicleResponse {
-	private Long id;
+	private Long vehicleId;
 	private String vehicleNumber;
 	private VehicleType vehicleType;
 	private VehicleStatus vehicleStatus;

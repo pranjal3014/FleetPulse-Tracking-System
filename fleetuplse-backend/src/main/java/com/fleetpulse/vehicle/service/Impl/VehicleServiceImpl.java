@@ -11,12 +11,13 @@ import com.fleetpulse.vehicle.exception.VehicleNotFoundException;
 import com.fleetpulse.vehicle.repository.VehicleRepository;
 import com.fleetpulse.vehicle.service.VehicleService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService{
 	
 	private final VehicleRepository vehicleRepository;
-	
 
 	@Override
 	public VehicleResponse saveVehicle(VehicleRequest request) {
@@ -66,7 +67,7 @@ public class VehicleServiceImpl implements VehicleService{
 
 	private VehicleResponse convertToDto(Vehicle vehicle) {
 		return VehicleResponse.builder()
-				.id(vehicle.getVehicleId())
+				.vehicleId(vehicle.getVehicleId())
 				.vehicleNumber(vehicle.getVehicleNumber())
 				.vehicleType(vehicle.getVehicleType())
 				.vehicleStatus(vehicle.getVehicleStatus())

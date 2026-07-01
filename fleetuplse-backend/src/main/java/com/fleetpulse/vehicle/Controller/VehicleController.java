@@ -12,22 +12,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fleetpulse.vehicle.dto.VehicleRequest;
 import com.fleetpulse.vehicle.dto.VehicleResponse;
 import com.fleetpulse.vehicle.service.VehicleService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/vehicles")
 public class VehicleController {
-	private VehicleService vehicleService;
-
-	public VehicleController(VehicleService vehicleService) {
-		super();
-		this.vehicleService = vehicleService;
-	}
+	private final VehicleService vehicleService;
 	
 	@PostMapping("/add")
 	public ResponseEntity<VehicleResponse> addVehicle(@Valid @RequestBody VehicleRequest vehicle){

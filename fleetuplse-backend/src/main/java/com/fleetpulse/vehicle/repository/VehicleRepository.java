@@ -4,6 +4,6 @@
 
     import com.fleetpulse.vehicle.entity.Vehicle;
 
-    public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
+public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
 
     }
