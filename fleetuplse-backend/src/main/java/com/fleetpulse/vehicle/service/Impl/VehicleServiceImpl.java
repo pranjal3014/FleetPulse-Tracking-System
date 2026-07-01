@@ -2,6 +2,7 @@ package com.fleetpulse.vehicle.service.Impl;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.fleetpulse.vehicle.dto.VehicleRequest;
 import com.fleetpulse.vehicle.dto.VehicleResponse;

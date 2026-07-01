@@ -3,6 +3,7 @@ package com.fleetpulse.vehicle.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fleetpulse.common.enums.VehicleType;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fleetpulse.common.enums.VehicleStatus;
@@ -38,7 +39,8 @@ public class Vehicle {
 	private String vehicleNumber;
 	
 	@Column(name="vehicle_type")
-	private String vehicleType;
+    @Enumerated(EnumType.STRING)
+	private VehicleType vehicleType;
 	
 	@Enumerated(EnumType.STRING)
 	private VehicleStatus vehicleStatus;

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fleetpulse.common.enums.VehicleStatus;
 
+import com.fleetpulse.common.enums.VehicleType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,7 +13,7 @@ import lombok.Data;
 public class VehicleResponse {
 	private Long vehicleId;
 	private String vehicleNumber;
-	private String vehicleType;
+	private VehicleType vehicleType;
 	private VehicleStatus vehicleStatus;
 	private LocalDateTime createdAt;
 }
