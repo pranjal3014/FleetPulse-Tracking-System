@@ -10,16 +10,13 @@ import com.fleetpulse.vehicle.exception.VehicleNotFoundException;
 import com.fleetpulse.vehicle.repository.VehicleRepository;
 import com.fleetpulse.vehicle.service.VehicleService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService{
 	
-	private VehicleRepository vehicleRepository;
-	
-
-	public VehicleServiceImpl(VehicleRepository vehicleRepository) {
-		super();
-		this.vehicleRepository = vehicleRepository;
-	}
+	private final VehicleRepository vehicleRepository;
 
 	@Override
 	public VehicleResponse saveVehicle(VehicleRequest request) {
@@ -40,13 +37,13 @@ public class VehicleServiceImpl implements VehicleService{
 	}
 
 	@Override
-	public VehicleResponse getByIdVehicle(int id) {
+	public VehicleResponse getByIdVehicle(Long id) {
 		Vehicle vehicle = vehicleRepository.findById(id).orElseThrow(()->new VehicleNotFoundException("Vehicle Not Found"));
 		return convertToDto(vehicle);
 	}
 
 	@Override
-	public VehicleResponse updateVehicle(int id, VehicleRequest request) {
+	public VehicleResponse updateVehicle(Long id, VehicleRequest request) {
 		Vehicle vehicle = vehicleRepository.findById(id).orElseThrow(()->new VehicleNotFoundException("Vehicle Not Found"));
 		vehicle.setVehicleNumber(request.getVehicleNumber());
 		vehicle.setVehicleStatus(request.getVehicleStatus());
@@ -57,7 +54,7 @@ public class VehicleServiceImpl implements VehicleService{
 	}
 
 	@Override
-	public boolean deleteById(int id) {
+	public boolean deleteById(Long id) {
 		boolean status = false;
 		Vehicle vehicle = vehicleRepository.findById(id).orElseThrow(()->new VehicleNotFoundException("Vehicle Not Found"));
 		if(vehicle != null) {
@@ -69,7 +66,7 @@ public class VehicleServiceImpl implements VehicleService{
 
 	private VehicleResponse convertToDto(Vehicle vehicle) {
 		return VehicleResponse.builder()
-				.id(vehicle.getVehicleId())
+				.vehicleId(vehicle.getVehicleId())
 				.vehicleNumber(vehicle.getVehicleNumber())
 				.vehicleType(vehicle.getVehicleType())
 				.vehicleStatus(vehicle.getVehicleStatus())

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Builder
 public class VehicleResponse {
-	private int id;
+	private Long vehicleId;
 	private String vehicleNumber;
 	private String vehicleType;
 	private VehicleStatus vehicleStatus;
