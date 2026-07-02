@@ -2,6 +2,7 @@ package com.fleetpulse.trip.service;
 
 import java.util.List;
 
+import com.fleetpulse.route.model.RouteDetails;
 import com.fleetpulse.trip.dto.TripRequest;
 import com.fleetpulse.trip.dto.TripResponse;
 
@@ -20,4 +21,6 @@ public interface TripService {
 		
 		//delete
 		boolean deleteById(Long id);
+
+    RouteDetails getTripRoute(Long tripId);
 }
