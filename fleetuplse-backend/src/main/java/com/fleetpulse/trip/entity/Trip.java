@@ -2,6 +2,7 @@ package com.fleetpulse.trip.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="trip")
+@Table(name="trips")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -54,7 +55,7 @@ public class Trip {
 	private LocalDate tripDate;
 	
 	@Column(name="trip_time")
-	private LocalDateTime tripTime;
+	private LocalTime tripTime;
 	
 	@CreationTimestamp
 	@Column(name="created_at")

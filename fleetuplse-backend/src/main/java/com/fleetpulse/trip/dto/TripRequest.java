@@ -1,7 +1,7 @@
 package com.fleetpulse.trip.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import lombok.Data;
 
@@ -12,5 +12,5 @@ public class TripRequest {
 	private String pickupLocation;
 	private String destinationLocation;
 	private LocalDate tripDate;
-	private LocalDateTime tripTime;
+	private LocalTime tripTime;
 }

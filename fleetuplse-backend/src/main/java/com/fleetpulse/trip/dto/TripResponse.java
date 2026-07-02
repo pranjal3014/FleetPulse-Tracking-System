@@ -2,6 +2,7 @@ package com.fleetpulse.trip.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.fleetpulse.common.enums.TripStatus;
 
@@ -17,7 +18,7 @@ public class TripResponse {
 	private String pickupLocation;
 	private String destinationLocation;
 	private LocalDate tripDate;
-	private LocalDateTime tripTime;
+	private LocalTime tripTime;
 	private TripStatus tripStatus;
 	private LocalDateTime createdAt;
 }
