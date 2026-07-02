@@ -14,9 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RouteDetails {
-    private Double distance;
+    private Double distanceKm;
 
-    private Double duration;
+    private Double durationHours;
 
     private List<Coordinate> coordinates;
 }

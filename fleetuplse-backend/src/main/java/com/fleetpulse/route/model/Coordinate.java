@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Coordinate {
-
-    private Double longitude;
     private Double latitude;
+    private Double longitude;
+
 
 }
