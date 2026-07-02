@@ -37,13 +37,13 @@ public class Trip {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tripId;
 	
-	 @ManyToOne
+	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "driver_id", nullable = false)
 	private Driver driver;
 	
-	 @ManyToOne
-	    @JoinColumn(name = "vehicle_id", nullable = false)
-	private Vehicle vehicle;
+     @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "vehicle_id", nullable = false)
+	 private Vehicle vehicle;
 	
 	@Column(name="pickup_location")
 	private String pickupLocation;
