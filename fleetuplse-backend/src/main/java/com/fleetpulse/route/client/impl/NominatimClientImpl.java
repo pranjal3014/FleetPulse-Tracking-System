@@ -14,7 +14,6 @@ public class NominatimClientImpl implements NominatimClient {
 
     private final RestClient nominatimRestClient;
     @Override
-
     public Coordinate getCoordinates(String place) {
 
         NominatimResponse[] response =

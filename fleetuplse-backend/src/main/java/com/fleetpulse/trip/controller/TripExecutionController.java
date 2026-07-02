@@ -1,26 +1,39 @@
 package com.fleetpulse.trip.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.fleetpulse.common.enums.TripStatus;
+import com.fleetpulse.simulator.service.SimulatorStateService;
+import com.fleetpulse.trip.dto.TripResponse;
 import com.fleetpulse.trip.service.TripExecutionService;
 import com.fleetpulse.trip.service.TripService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/trips")
 @RequiredArgsConstructor
-@RequestMapping("/trips")
 public class TripExecutionController {
+	private final SimulatorStateService simulatorStateService;
+	private final TripService tripService;
+	private final TripExecutionService tripExecutionService;
 
-    private final TripExecutionService tripExecutionService;
+	@PostMapping("/{tripId}/start")
+	public ResponseEntity<String> startTrip(@PathVariable Long tripId) {
 
+		tripExecutionService.startTrip(tripId);
 
+		simulatorStateService.initializeTrip(tripId);
 
-    @PostMapping("/{id}/start")
-    public ResponseEntity<String> startTrip(@PathVariable Long id){
-        tripExecutionService.startTrip(id);
-        return ResponseEntity.ok("Trip Started Successfully");
-    }
+		return ResponseEntity.ok("Trip Started Successfully");
+	}
+
+	@GetMapping("/active")
+	public ResponseEntity<List<TripResponse>> getActiveTrips() {
+
+		return ResponseEntity.ok(tripService.getActiveTrips());
+	}
 }
