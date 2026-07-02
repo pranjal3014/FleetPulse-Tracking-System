@@ -27,27 +27,27 @@ public class TripController {
 	private final TripService tripService;
 	
 	@PostMapping("/add")
-	public ResponseEntity<TripResponse> addVehicle(@Valid @RequestBody TripRequest request){
+	public ResponseEntity<TripResponse> addTrip(@Valid @RequestBody TripRequest request){
 		return ResponseEntity.status(HttpStatus.CREATED).body(tripService.saveTrip(request));
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<TripResponse> getById(@PathVariable Long id){
+	public ResponseEntity<TripResponse> getTripById(@PathVariable Long id){
 		return ResponseEntity.ok(tripService.findByIdTrip(id));
 	}
 	
-	@GetMapping("/")
-	public ResponseEntity<List<TripResponse>> getAll(){
+	@GetMapping
+	public ResponseEntity<List<TripResponse>> getAllTrip(){
 		return ResponseEntity.ok(tripService.findAllTrip());
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<TripResponse> updateById(@PathVariable Long id, @Valid @RequestBody TripRequest request){
+	public ResponseEntity<TripResponse> updateTripById(@PathVariable Long id, @Valid @RequestBody TripRequest request){
 		return ResponseEntity.ok(tripService.updateTrip(id, request));
 	}
 	
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable Long id) {
+	public String deleteTripById(@PathVariable Long id) {
 		boolean status = tripService.deleteById(id);
 		if(status)
 			return "Data Deleted Successfully";
