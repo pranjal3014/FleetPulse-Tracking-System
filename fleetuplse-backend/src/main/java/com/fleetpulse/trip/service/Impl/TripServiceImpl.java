@@ -2,6 +2,8 @@ package com.fleetpulse.trip.service.Impl;
 
 import java.util.List;
 
+import com.fleetpulse.route.model.RouteDetails;
+import com.fleetpulse.route.service.RouteProvider;
 import org.springframework.stereotype.Service;
 
 import com.fleetpulse.common.enums.TripStatus;
@@ -26,6 +28,7 @@ public class TripServiceImpl implements TripService{
 	private final TripRepository tripRepository;
 	private final DriverRepository driverRepository;
 	private final VehicleRepository vehicleRepository;
+    private final RouteProvider routeProvider;
 
 	@Override
 	public TripResponse saveTrip(TripRequest request) {
@@ -83,8 +86,20 @@ public class TripServiceImpl implements TripService{
 		}
 		return false;
 	}
-	
-	private TripResponse convertToDto(Trip trip) {
+
+    @Override
+    public RouteDetails getTripRoute(Long tripId) {
+        Trip trip = tripRepository.findById(tripId)
+                .orElseThrow(() ->
+                        new TripNotFoundException("Trip Not Found"));
+
+        return routeProvider.getRoute(
+                trip.getPickupLocation(),
+                trip.getDestinationLocation()
+        );
+    }
+
+    private TripResponse convertToDto(Trip trip) {
 		return TripResponse.builder()
 				.tripId(trip.getTripId())
 				.drivername(trip.getDriver().getDriverName())

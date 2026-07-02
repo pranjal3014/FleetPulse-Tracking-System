@@ -2,6 +2,7 @@ package com.fleetpulse.trip.controller;
 
 import java.util.List;
 
+import com.fleetpulse.route.model.RouteDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,4 +54,13 @@ public class TripController {
 			return "Data Deleted Successfully";
 		return "Data Not Found";
 	}
+
+    @GetMapping("/{id}/route")
+    public ResponseEntity<RouteDetails> getTripRoute(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                tripService.getTripRoute(id)
+        );
+    }
 }
