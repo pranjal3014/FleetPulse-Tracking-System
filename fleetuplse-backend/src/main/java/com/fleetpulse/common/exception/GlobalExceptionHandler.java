@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.fleetpulse.driver.exception.DriverNotFoundException;
 import com.fleetpulse.location.exception.LocationNotFoundException;
+import com.fleetpulse.trip.exception.TripNotFoundException;
 import com.fleetpulse.vehicle.exception.VehicleNotFoundException;
 
 @RestControllerAdvice
@@ -33,6 +34,13 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, String>> locationCustomException(LocationNotFoundException ex){
 		Map<String, String> error = new HashMap<String, String>();
 		error.put("message", "Location Not Found");
+		return new ResponseEntity<Map<String,String>>(error,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(TripNotFoundException.class)
+	public ResponseEntity<Map<String, String>> TripCustomException(TripNotFoundException ex){
+		Map<String, String> error = new HashMap<String, String>();
+		error.put("message", "Trip Not Found");
 		return new ResponseEntity<Map<String,String>>(error,HttpStatus.BAD_REQUEST);
 	}
 }
