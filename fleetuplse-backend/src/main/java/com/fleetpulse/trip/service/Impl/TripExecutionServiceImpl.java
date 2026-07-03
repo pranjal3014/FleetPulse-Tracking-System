@@ -2,6 +2,7 @@ package com.fleetpulse.trip.service.Impl;
 
 import java.util.List;
 
+import com.fleetpulse.simulator.service.SimulatorStateService;
 import org.springframework.stereotype.Service;
 
 import com.fleetpulse.common.enums.TripStatus;
@@ -22,25 +23,30 @@ public class TripExecutionServiceImpl implements TripExecutionService {
 
 	private final TripRepository tripRepository;
 	private final RouteProvider routeProvider;
+    private final SimulatorStateService simulatorStateService;
 
 	@Override
 	public void startTrip(Long tripId) {
+
 
 		Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new TripNotFoundException("Trip Not Found"));
 
 		if (trip.getTripStatus() != TripStatus.SCHEDULED) {
 			throw new IllegalStateException("Only scheduled trips can be started.");
 		}
-		RouteDetails route = routeProvider.getRoute(trip.getPickupLocation(), trip.getDestinationLocation());
+//		RouteDetails route = routeProvider.getRoute(trip.getPickupLocation(), trip.getDestinationLocation());
 
+
+
+        simulatorStateService.initializeTrip(tripId);
 		trip.setTripStatus(TripStatus.IN_PROGRESS);
-		trip.setTripStatus(TripStatus.IN_PROGRESS);
+//		trip.setTripStatus(TripStatus.IN_PROGRESS);
 
 		tripRepository.save(trip);
-
-		System.out.println("Distance : " + route.getDistanceKm());
-		System.out.println("Duration : " + route.getDurationHours());
-		System.out.println("Points : " + route.getCoordinates().size());
+//
+//		System.out.println("Distance : " + route.getDistanceKm());
+//		System.out.println("Duration : " + route.getDurationHours());
+//		System.out.println("Points : " + route.getCoordinates().size());
 	}
 	
 	private TripResponse convertToDto(Trip trip) {

@@ -1,5 +1,7 @@
 package com.fleetpulse.trip.repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +16,10 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 	boolean existsByVehicleVehicleIdAndTripStatusIn(Long vehicleId, List<TripStatus> statuses);
     List<Trip> findByTripStatus(
             TripStatus tripStatus
+    );
+    List<Trip> findByTripStatusAndTripDateLessThanEqualAndTripTimeLessThanEqual(
+            TripStatus tripStatus,
+            LocalDate tripDate,
+            LocalTime tripTime
     );
 }
