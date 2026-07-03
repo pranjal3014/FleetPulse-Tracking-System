@@ -70,6 +70,6 @@ public class GPSSimulatorService {
 
 	private double generateSpeed() {
 
-		return Math.round((35 + (Math.random() * 25)) * 100.0) / 100.0;
+	return 35 + (int) (Math.random() * 46);
 	}
 }
