@@ -51,8 +51,8 @@ public class TripController {
 	public String deleteTripById(@PathVariable Long id) {
 		boolean status = tripService.deleteById(id);
 		if(status)
-			return "Data Deleted Successfully";
-		return "Data Not Found";
+			return "Trip Cancelled Successfully!!!";
+		return "Trip Not Found";
 	}
 
     @GetMapping("/{id}/route")
