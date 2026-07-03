@@ -18,25 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TripSchedulerServiceImpl implements TripSchedulerService {
 
-    private final TripRepository tripRepository;
-    private final TripExecutionService tripExecutionService;
-    @Override
-    public void startScheduledTrips() {
+	private final TripRepository tripRepository;
+	private final TripExecutionService tripExecutionService;
 
-        List<Trip> scheduledTrips =
-                tripRepository.findByTripStatusAndTripDateLessThanEqualAndTripTimeLessThanEqual(
-                        TripStatus.SCHEDULED,
-                        LocalDate.now(),
-                        LocalTime.now()
-                );
+	@Override
+	public void startScheduledTrips() {
 
-        for (Trip trip : scheduledTrips) {
-            try {
-                tripExecutionService.startTrip(trip.getTripId());
-            } catch (Exception ex) {
-                log.error("Failed to start trip {}", trip.getTripId(), ex);
-            }
-        }
+		List<Trip> scheduledTrips = tripRepository.findByTripStatusAndTripDateLessThanEqualAndTripTimeLessThanEqual(
+				TripStatus.SCHEDULED, LocalDate.now(), LocalTime.now());
 
-    }
+		for (Trip trip : scheduledTrips) {
+			try {
+				tripExecutionService.startTrip(trip.getTripId());
+			} catch (Exception ex) {
+				log.error("Failed to start trip {}", trip.getTripId(), ex);
+			}
+		}
+
+	}
 }
