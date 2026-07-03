@@ -9,6 +9,7 @@ import com.fleetpulse.location.service.LocationService;
 import com.fleetpulse.vehicle.entity.Vehicle;
 import com.fleetpulse.vehicle.exception.VehicleNotFoundException;
 import com.fleetpulse.vehicle.repository.VehicleRepository;
+import com.fleetpulse.websocket.publisher.LocationPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
     private final VehicleRepository vehicleRepository;
+    private final LocationPublisher locationPublisher;
 
 
     @Override
@@ -39,7 +41,12 @@ public class LocationServiceImpl implements LocationService {
 
        LocationPing savedLocation = locationRepository.save(locationPing);
 
+       LocationResponse response = convertToDto(savedLocation);
+       locationPublisher.publish(response);
+
+
        return convertToDto(savedLocation);
+
     }
 
 
