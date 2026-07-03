@@ -23,4 +23,5 @@ public interface TripService {
 		boolean deleteById(Long id);
 
     RouteDetails getTripRoute(Long tripId);
+    List<TripResponse> getActiveTrips();
 }

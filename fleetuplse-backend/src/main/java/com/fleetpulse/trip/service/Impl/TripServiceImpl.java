@@ -98,6 +98,17 @@ public class TripServiceImpl implements TripService{
                 trip.getDestinationLocation()
         );
     }
+    
+    public List<TripResponse> getActiveTrips() {
+
+        return tripRepository
+                .findByTripStatus(
+                        TripStatus.IN_PROGRESS
+                )
+                .stream()
+                .map(this::convertToDto)
+                .toList();
+    }
 
     private TripResponse convertToDto(Trip trip) {
 		return TripResponse.builder()

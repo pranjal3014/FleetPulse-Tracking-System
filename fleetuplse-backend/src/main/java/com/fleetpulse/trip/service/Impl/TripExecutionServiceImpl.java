@@ -1,5 +1,7 @@
 package com.fleetpulse.trip.service.Impl;
 
+import org.springframework.stereotype.Service;
+
 import com.fleetpulse.common.enums.TripStatus;
 import com.fleetpulse.route.model.RouteDetails;
 import com.fleetpulse.route.service.RouteProvider;
@@ -8,18 +10,19 @@ import com.fleetpulse.trip.entity.Trip;
 import com.fleetpulse.trip.exception.TripNotFoundException;
 import com.fleetpulse.trip.repository.TripRepository;
 import com.fleetpulse.trip.service.TripExecutionService;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class TripExecutionServiceImpl implements TripExecutionService {
 
 	private final TripRepository tripRepository;
 	private final RouteProvider routeProvider;
 
+	@Override
+	public void startTrip(Long tripId) {
 	@Override
 	public void startTrip(Long tripId) {
 
@@ -30,6 +33,7 @@ public class TripExecutionServiceImpl implements TripExecutionService {
 		}
 		RouteDetails route = routeProvider.getRoute(trip.getPickupLocation(), trip.getDestinationLocation());
 
+		trip.setTripStatus(TripStatus.IN_PROGRESS);
 		trip.setTripStatus(TripStatus.IN_PROGRESS);
 
 		tripRepository.save(trip);
