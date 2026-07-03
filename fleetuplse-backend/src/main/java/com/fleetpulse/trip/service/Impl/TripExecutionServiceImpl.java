@@ -1,5 +1,7 @@
 package com.fleetpulse.trip.service.Impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.fleetpulse.common.enums.TripStatus;
@@ -21,8 +23,6 @@ public class TripExecutionServiceImpl implements TripExecutionService {
 	private final TripRepository tripRepository;
 	private final RouteProvider routeProvider;
 
-	@Override
-	public void startTrip(Long tripId) {
 	@Override
 	public void startTrip(Long tripId) {
 
@@ -55,5 +55,45 @@ public class TripExecutionServiceImpl implements TripExecutionService {
 				.tripStatus(trip.getTripStatus())
 				.createdAt(trip.getCreatedAt())
 				.build();
+	}
+	public List<TripResponse> getActiveTrips() {
+
+        return tripRepository
+                .findByTripStatus(
+                        TripStatus.IN_PROGRESS
+                )
+                .stream()
+                .map(this::convertToDto)
+                .toList();
+    }
+
+	@Override
+	public void completeTrip(Long tripId) {
+
+	    Trip trip = tripRepository.findById(tripId)
+	            .orElseThrow(() ->
+	                    new TripNotFoundException(
+	                            "Trip Not Found"
+	                    ));
+
+	    trip.setTripStatus(
+	            TripStatus.COMPLETED
+	    );
+
+	    tripRepository.save(trip);
+
+	    System.out.println(
+	            "Trip Completed : " + tripId
+	    );
+
+	    System.out.println(
+	            "Driver Available : "
+	            + trip.getDriver().getDriverId()
+	    );
+
+	    System.out.println(
+	            "Vehicle Available : "
+	            + trip.getVehicle().getVehicleId()
+	    );
 	}
 }

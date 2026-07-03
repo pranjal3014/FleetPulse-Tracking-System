@@ -22,6 +22,6 @@ public interface TripService {
 		//delete
 		boolean deleteById(Long id);
 
-    RouteDetails getTripRoute(Long tripId);
-    List<TripResponse> getActiveTrips();
+		//route details 
+		RouteDetails getTripRoute(Long tripId);
 }
