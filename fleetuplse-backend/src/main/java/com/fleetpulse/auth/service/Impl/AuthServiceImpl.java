@@ -113,15 +113,17 @@ public class AuthServiceImpl implements AuthService {
 
 	private RefreshToken createRefreshToken(User user) {
 
-		RefreshToken refreshToken = new RefreshToken();
+	    refreshTokenRepository.deleteByUser(user);
 
-		refreshToken.setUser(user);
+	    RefreshToken refreshToken = new RefreshToken();
 
-		refreshToken.setToken(UUID.randomUUID().toString());
+	    refreshToken.setUser(user);
+	    refreshToken.setToken(UUID.randomUUID().toString());
+	    refreshToken.setExpireDate(
+	            LocalDateTime.now().plusDays(7)
+	    );
 
-		refreshToken.setExpireDate(LocalDateTime.now().plusDays(7));
-
-		return refreshTokenRepository.save(refreshToken);
+	    return refreshTokenRepository.save(refreshToken);
 	}
 
 	private UserResponse convertToDto(User user) {
