@@ -9,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.fleetpulse.auth.exception.ApprovalPendingException;
+import com.fleetpulse.auth.exception.EmailAlreadyExistsException;
+import com.fleetpulse.auth.exception.InvalidCredentialsException;
+import com.fleetpulse.auth.exception.UserNotFoundException;
 import com.fleetpulse.driver.exception.DriverNotFoundException;
 import com.fleetpulse.location.exception.LocationNotFoundException;
 import com.fleetpulse.trip.exception.DriverAlreadyAssignedException;
@@ -63,12 +67,44 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, Object>> handleVehicleAssigned(VehicleAlreadyAssignedException ex) {
 
 		Map<String, Object> response = new HashMap<>();
-
 		response.put("timestamp", LocalDateTime.now());
-
 		response.put("message", ex.getMessage());
-
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 	}
 
+	@ExceptionHandler(ApprovalPendingException.class)
+	public ResponseEntity<Map<String, Object>> approvalPendingCustomException(ApprovalPendingException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+	
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ResponseEntity<Map<String, Object>> emailAlreadyExistsCustomException(EmailAlreadyExistsException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+	
+	@ExceptionHandler(InvalidCredentialsException.class)
+	public ResponseEntity<Map<String, Object>> invalidCredentialCustomException(InvalidCredentialsException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> UserNotFoundCustomException(UserNotFoundException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
 }
