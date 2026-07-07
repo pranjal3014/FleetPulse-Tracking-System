@@ -1,0 +1,21 @@
+# Frontend
+fleetpulse-frontend/node_modules/
+fleetpulse-frontend/dist/
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Backend secrets
+fleetuplse-backend/src/main/resources/application.properties

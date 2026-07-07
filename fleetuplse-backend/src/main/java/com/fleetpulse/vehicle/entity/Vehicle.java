@@ -35,7 +35,7 @@ public class Vehicle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long vehicleId;
 	
-	@Column(name="vehicle_number")
+	@Column(name="vehicle_number", unique = true, nullable = false)
 	private String vehicleNumber;
 	
 	@Column(name="vehicle_type")

@@ -78,6 +78,8 @@ public class DriverServiceImpl implements DriverService{
 				.driverId(driver.getDriverId())
 				.driverName(driver.getDriverName())
 				.driverPhone(driver.getDriverPhone())
+				.vehicleId(driver.getVehicle() != null ? driver.getVehicle().getVehicleId() : null)
+				.vehicleNumber(driver.getVehicle() != null ? driver.getVehicle().getVehicleNumber() : null)
 				.build();
 	}
 	

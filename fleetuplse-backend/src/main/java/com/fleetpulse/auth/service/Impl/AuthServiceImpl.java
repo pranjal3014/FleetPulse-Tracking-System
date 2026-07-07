@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fleetpulse.auth.dto.DriverRegisterRequest;
 import com.fleetpulse.auth.dto.LoginRequest;
@@ -25,6 +26,8 @@ import com.fleetpulse.auth.security.JwtService;
 import com.fleetpulse.auth.service.AuthService;
 import com.fleetpulse.common.enums.ApprovalStatus;
 import com.fleetpulse.common.enums.Role;
+import com.fleetpulse.driver.entity.Driver;
+import com.fleetpulse.driver.repository.DriverRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +39,7 @@ public class AuthServiceImpl implements AuthService {
 	private final JwtService jwtService;
 	private final PasswordEncoder passwordEncoder;
 	private final RefreshTokenRepository refreshTokenRepository;
+	private final DriverRepository driverRepository;
 
 	@Override
 	public UserResponse registerDriver(DriverRegisterRequest request) {
@@ -71,6 +75,13 @@ public class AuthServiceImpl implements AuthService {
 
 		User updatedUser = userRepository.save(user);
 
+		if (updatedUser.getRole() == Role.DRIVER && !driverRepository.existsByUserId(updatedUser.getUserId())) {
+			Driver driver = new Driver();
+			driver.setDriverName(updatedUser.getName());
+			driver.setUserId(updatedUser.getUserId());
+			driverRepository.save(driver);
+		}
+
 		return convertToDto(updatedUser);
 	}
 
@@ -87,6 +98,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
+	@Transactional
 	public LoginResponse login(LoginRequest request) {
 
 		User user = userRepository.findByEmail(request.getEmail())
@@ -114,6 +126,7 @@ public class AuthServiceImpl implements AuthService {
 	private RefreshToken createRefreshToken(User user) {
 
 	    refreshTokenRepository.deleteByUser(user);
+	    refreshTokenRepository.flush();
 
 	    RefreshToken refreshToken = new RefreshToken();
 
@@ -148,8 +161,10 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
+	@Transactional
 	public void logout(String refreshToken) {
 
 		refreshTokenRepository.deleteByToken(refreshToken);
+		refreshTokenRepository.flush();
 	}
 }

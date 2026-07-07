@@ -32,6 +32,9 @@ public class Driver {
 	
 	@Column(name="Mobile_number")
 	private Long driverPhone;
+
+	@Column(name = "user_id", unique = true)
+	private Long userId;
 	
 	@ManyToOne
 	@JoinColumn(name = "vehicle_id")

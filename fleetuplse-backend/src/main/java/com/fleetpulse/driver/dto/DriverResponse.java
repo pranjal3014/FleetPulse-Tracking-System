@@ -10,4 +10,6 @@ public class DriverResponse {
 	private Long driverId;
 	private String driverName;
 	private Long driverPhone;
+	private Long vehicleId;
+	private String vehicleNumber;
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.fleetpulse.auth.dto.DriverRegisterRequest;
 import com.fleetpulse.auth.dto.LoginRequest;
 import com.fleetpulse.auth.dto.LoginResponse;
+import com.fleetpulse.auth.dto.RefreshTokenRequest;
+import com.fleetpulse.auth.dto.RefreshTokenResponse;
 import com.fleetpulse.auth.dto.UserResponse;
 import com.fleetpulse.auth.service.AuthService;
 
@@ -47,5 +49,16 @@ public class AuthController {
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
 
 		return ResponseEntity.ok(authService.login(request));
+	}
+
+	@PostMapping("/refresh")
+	public ResponseEntity<RefreshTokenResponse> refresh(@RequestBody RefreshTokenRequest request) {
+		return ResponseEntity.ok(authService.refreshToken(request));
+	}
+
+	@PostMapping("/logout")
+	public ResponseEntity<Void> logout(@RequestBody RefreshTokenRequest request) {
+		authService.logout(request.getRefreshToken());
+		return ResponseEntity.noContent().build();
 	}
 }

@@ -107,4 +107,13 @@ public class GlobalExceptionHandler {
 		response.put("message", ex.getMessage());
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Map<String, Object>> illegalArgumentException(IllegalArgumentException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	}
 }

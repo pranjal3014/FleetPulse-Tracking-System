@@ -10,5 +10,6 @@ public interface LocationRepository extends JpaRepository<LocationPing , Long> {
 
     List<LocationPing> findByVehicle_VehicleId(Long vehicleId);
     Optional<LocationPing> findTopByVehicle_VehicleIdOrderByTimestampDesc(Long vehicleId);
+    void deleteByVehicleVehicleId(Long vehicleId);
 
 }
