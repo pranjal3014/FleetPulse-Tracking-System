@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: 'mysql'
+    container_name: fleetpulse-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fleetpulse
+    ports:
+      - "3307:3306"
+
+  backend:
+    build: ./fleetuplse-backend
+    container_name: fleetpulse-backend
+    depends_on:
+      - mysql
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/fleetpulse
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    ports:
+      - "8081:8080"
+
+  frontend:
+    build: ./fleetpulse-frontend
+    container_name: fleetpulse-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
