@@ -1,0 +1,42 @@
+# Node
+node_modules/
+dist/
+npm-debug.log*
+
+# React / Vite
+.vite/
+
+# Java
+target/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment Variables
+.env
+.env.*
+
+# Maven Wrapper Logs
+.mvn/wrapper/maven-wrapper.jar
+
+# Docker
+docker-data/
+
+# Temporary files
+*.tmp
+*.swp
