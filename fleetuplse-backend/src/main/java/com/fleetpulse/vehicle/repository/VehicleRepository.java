@@ -1,0 +1,12 @@
+package com.fleetpulse.vehicle.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.fleetpulse.vehicle.entity.Vehicle;
+
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
+
+	boolean existsByVehicleNumberIgnoreCase(String vehicleNumber);
+
+	boolean existsByVehicleNumberIgnoreCaseAndVehicleIdNot(String vehicleNumber, Long vehicleId);
+}

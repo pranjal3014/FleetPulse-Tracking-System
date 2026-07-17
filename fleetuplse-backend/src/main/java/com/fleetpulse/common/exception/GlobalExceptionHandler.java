@@ -1,0 +1,119 @@
+package com.fleetpulse.common.exception;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.fleetpulse.auth.exception.ApprovalPendingException;
+import com.fleetpulse.auth.exception.EmailAlreadyExistsException;
+import com.fleetpulse.auth.exception.InvalidCredentialsException;
+import com.fleetpulse.auth.exception.UserNotFoundException;
+import com.fleetpulse.driver.exception.DriverNotFoundException;
+import com.fleetpulse.location.exception.LocationNotFoundException;
+import com.fleetpulse.trip.exception.DriverAlreadyAssignedException;
+import com.fleetpulse.trip.exception.TripNotFoundException;
+import com.fleetpulse.trip.exception.VehicleAlreadyAssignedException;
+import com.fleetpulse.vehicle.exception.VehicleNotFoundException;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+	@ExceptionHandler(VehicleNotFoundException.class)
+	public ResponseEntity<Map<String, String>> vehicleCustomException(VehicleNotFoundException ex) {
+		Map<String, String> error = new HashMap<String, String>();
+		error.put("message", "Vehicle Not Found");
+		return new ResponseEntity<Map<String, String>>(error, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(DriverNotFoundException.class)
+	public ResponseEntity<Map<String, String>> driverCustomException(DriverNotFoundException ex) {
+		Map<String, String> error = new HashMap<String, String>();
+		error.put("message", "Driver Not Found");
+		return new ResponseEntity<Map<String, String>>(error, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(LocationNotFoundException.class)
+	public ResponseEntity<Map<String, String>> locationCustomException(LocationNotFoundException ex) {
+		Map<String, String> error = new HashMap<String, String>();
+		error.put("message", "Location Not Found");
+		return new ResponseEntity<Map<String, String>>(error, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(TripNotFoundException.class)
+	public ResponseEntity<Map<String, String>> TripCustomException(TripNotFoundException ex) {
+		Map<String, String> error = new HashMap<String, String>();
+		error.put("message", "Trip Not Found");
+		return new ResponseEntity<Map<String, String>>(error, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(DriverAlreadyAssignedException.class)
+	public ResponseEntity<Map<String, Object>> handleDriverAssigned(DriverAlreadyAssignedException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+
+		response.put("timestamp", LocalDateTime.now());
+
+		response.put("message", ex.getMessage());
+
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+
+	@ExceptionHandler(VehicleAlreadyAssignedException.class)
+	public ResponseEntity<Map<String, Object>> handleVehicleAssigned(VehicleAlreadyAssignedException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+
+	@ExceptionHandler(ApprovalPendingException.class)
+	public ResponseEntity<Map<String, Object>> approvalPendingCustomException(ApprovalPendingException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+	
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ResponseEntity<Map<String, Object>> emailAlreadyExistsCustomException(EmailAlreadyExistsException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+	
+	@ExceptionHandler(InvalidCredentialsException.class)
+	public ResponseEntity<Map<String, Object>> invalidCredentialCustomException(InvalidCredentialsException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> UserNotFoundCustomException(UserNotFoundException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Map<String, Object>> illegalArgumentException(IllegalArgumentException ex) {
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("timestamp", LocalDateTime.now());
+		response.put("message", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	}
+}
