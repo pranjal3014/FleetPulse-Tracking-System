@@ -20,6 +20,11 @@ public class AuthController {
 
 	private final AuthService authService;
 
+	@GetMapping("/")
+    public String home() {
+        return "FleetPulse Backend Running Successfully";
+    }
+
 	@PostMapping("/register-driver")
 	public ResponseEntity<UserResponse> registerDriver(@RequestBody DriverRegisterRequest request) {
 
